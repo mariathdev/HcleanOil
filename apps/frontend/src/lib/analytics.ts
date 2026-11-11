@@ -110,7 +110,7 @@ export function enviarLead(dados: {
   leadId?: string;
   /** Valor estimado do pedido, vindo do servidor. */
   valor?: number;
-  itens: AnalyticsItem[];
+  itens?: AnalyticsItem[];
   estado?: string;
   produtos?: string;
 }): void {
@@ -121,11 +121,8 @@ export function enviarLead(dados: {
     produtos_pedidos: dados.produtos,
     ecommerce: {
       currency: 'BRL',
-      /* Sem `value` o Google Ads trata todo lead como igual e o lance por
-         valor fica cego. O número vem do servidor, que é quem tem a tabela
-         de preços. */
       value: dados.valor,
-      items: dados.itens,
+      items: dados.itens ?? [],
     },
   });
 }

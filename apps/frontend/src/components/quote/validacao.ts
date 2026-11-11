@@ -121,7 +121,7 @@ export function cursorDepoisDaMascara(
 /* ------------------------------------------------------------ validação */
 
 /** Campos que carregam mensagem de erro própria. */
-export type CampoComErro = 'nome' | 'empresa' | 'email' | 'telefone' | 'estado';
+export type CampoComErro = 'nome' | 'empresa' | 'email' | 'telefone';
 
 export type Erros = Partial<Record<CampoComErro, string>>;
 
@@ -135,7 +135,6 @@ export const ORDEM_DOS_CAMPOS: CampoComErro[] = [
   'empresa',
   'email',
   'telefone',
-  'estado',
 ];
 
 /** `id` do input de cada campo. Os três de rastreamento não seguem o padrão. */
@@ -147,7 +146,6 @@ export const ID_DO_CAMPO: Record<CampoComErro, string> = {
   empresa: 'q-empresa',
   email: 'form-field-Email',
   telefone: 'form-field-phone',
-  estado: 'q-estado',
 };
 
 /** `id` do parágrafo de erro, referenciado por `aria-describedby`. */
@@ -202,8 +200,6 @@ export function validar(valores: Record<CampoComErro, string>): Erros {
   if (valores.telefone.trim() && digitos.length !== 10 && digitos.length !== 11) {
     erros.telefone = 'Informe DDD e telefone completos, como (21) 99999-9999.';
   }
-
-  if (!valores.estado) erros.estado = 'Selecione o estado de entrega.';
 
   return erros;
 }
